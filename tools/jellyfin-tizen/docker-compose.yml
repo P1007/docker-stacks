@@ -1,0 +1,7 @@
+services:
+  jellyfin-installer:
+    image: georift/install-jelfin-tizen:latest
+    container_name: jellyfin-tizen-pusher
+    network_mode: host
+    command: ${TV_IP}
+    restart: no
