@@ -1,0 +1,10 @@
+services:
+  cf-ddns:
+    image: oznu/cloudflare-ddns:latest
+    container_name: cf-ddns
+    restart: unless-stopped
+    environment:
+      - API_KEY=${CF_API_KEY}
+      - ZONE=${CF_ZONE}
+      - SUBDOMAIN=*
+      - PROXIED=false
