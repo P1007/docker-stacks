@@ -1,0 +1,4 @@
+# Secrets und Umgebungsvariablen ausschließen
+.env
+*.log
+data/
