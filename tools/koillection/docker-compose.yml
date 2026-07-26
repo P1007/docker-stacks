@@ -1,0 +1,31 @@
+services:
+  koillection:
+    image: koillection/koillection:latest
+    container_name: koillection
+    ports:
+      - 5050:80
+    environment:
+      - DB_DRIVER=pdo_pgsql
+      - DB_HOST=koillection-db
+      - DB_PORT=5432
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_VERSION=15
+      - APP_ENV=prod
+      - APP_SECRET=${APP_SECRET}
+    volumes:
+      - ./uploads:/var/www/koillection/public/uploads
+    depends_on:
+      - koillection-db
+    restart: unless-stopped
+  koillection-db:
+    image: postgres:15-alpine
+    container_name: koillection-db
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+    restart: unless-stopped
